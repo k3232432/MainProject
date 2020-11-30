@@ -1,0 +1,115 @@
+<?php
+/**
+ * The base configuration for WordPress
+ *
+ * The wp-config.php creation script uses this file during the
+ * installation. You don't have to use the web site, you can
+ * copy this file to "wp-config.php" and fill in the values.
+ *
+ * This file contains the following configurations:
+ *
+ * * MySQL settings
+ * * Secret keys
+ * * Database table prefix
+ * * ABSPATH
+ *
+ * @link https://codex.wordpress.org/Editing_wp-config.php
+ *
+ * @package WordPress
+ */
+
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+{% if ag_wordpress.docker_env %}
+define('DB_NAME', 'wordpress');
+{% else %}
+define('DB_NAME', '{{ ag_wordpress_database.dbname }}');
+{% endif %}
+
+/** MySQL database username */
+{% if ag_wordpress.docker_env %}
+define('DB_USER', 'wordpress');
+{% else %}
+define('DB_USER', '{{ ag_wordpress_database.username }}');
+{% endif %}
+
+/** MySQL database password */
+{% if ag_wordpress.docker_env %}
+define('DB_PASSWORD', 'password');
+{% else %}
+define('DB_PASSWORD', '{{ ag_wordpress_database.password }}');
+{% endif %}
+
+/** MySQL hostname */
+{% if ag_wordpress.docker_env %}
+define('DB_HOST', 'database-1.cyc3j4uril20.ap-northeast-2.rds.amazonaws.com');
+{% else %}
+define('DB_HOST', '{{ ag_wordpress_database.hostname }}');
+{% endif %}
+
+/** Disable FTP */
+{% if ag_wordpress.disable_ftp %}
+define('FS_METHOD', 'direct');
+define('FTP_BASE', '{{ ag_wordpress.basedir }}/');
+define('FTP_CONTENT_DIR', '{{ ag_wordpress.basedir }}/wp-content/');
+define('FTP_PLUGIN_DIR ', '{{ ag_wordpress.basedir }}/plugins/');
+{% endif %}
+
+/** Database Charset to use in creating database tables. */
+define('DB_CHARSET', 'utf8');
+
+/** The Database Collate type. Don't change this if in doubt. */
+define('DB_COLLATE', '');
+
+/**#@+
+ * Authentication Unique Keys and Salts.
+ *
+ * Change these to different unique phrases!
+ * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
+ * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
+ *
+ * @since 2.6.0
+ */
+define('AUTH_KEY',         '7f+ f8S68vZ--rhf#ghW!pA2_|la-)|fEH3]Eo/8+tRfxkpx1E)MIv.#(k.m,z;7');
+define('SECURE_AUTH_KEY',  'zb/shLzg},FBaGk!o1Qkz>+T$J3%3H+YG+GXRrVz}<]n<0@6qh2/ilqSRS@@1?g>');
+define('LOGGED_IN_KEY',    '.5Hw(|u[fK2ZOcHpo&i|G|V1g^g<*2fvZ,z[O,LUu=AG58 Jw*+SvGKXjfXI+4E1');
+define('NONCE_KEY',        'D-J 5`Z=?Mfx-|uy4XqQ1S(${CI*i[GNW8Kd^=:T/+L$e{|C n[wNLw|_-wq,S$R');
+define('AUTH_SALT',        'ov&Sk;[}ljVR|`Lm|3{+..dR]mgCfe-u(s3$NeZZ]+uLeL+cDnOWs(CRj@7SF->U');
+define('SECURE_AUTH_SALT', 'Ympm%<33#XQoQ.c|1l:U|o}~xsiJ`Z2z|{`g?_i:<O*6yWM$x2*{c?:b^_oe0a&|');
+define('LOGGED_IN_SALT',   '`&.J5q%1gJUvqGxA-8~!YbN`|*SMalQX+6rn3S} vN(j+5kAp7~@>}%]ewzRKR)~');
+define('NONCE_SALT',       'M>L$4Km]oD^Tnkd)eDVlR)C&H#, k)WGK+AMcIuoV}gS.O[.<}rIQs;(8&#@47@.');
+
+{{ ag_wordpress_salt.stdout }}
+
+/**#@-*/
+
+/**
+ * WordPress Database Table prefix.
+ *
+ * You can have multiple installations in one database if you give each
+ * a unique prefix. Only numbers, letters, and underscores please!
+ */
+$table_prefix  = 'wp_';
+
+/**
+ * For developers: WordPress debugging mode.
+ *
+ * Change this to true to enable the display of notices during development.
+ * It is strongly recommended that plugin and theme developers use WP_DEBUG
+ * in their development environments.
+ *
+ * For information on other constants that can be used for debugging,
+ * visit the Codex.
+ *
+ * @link https://codex.wordpress.org/Debugging_in_WordPress
+ */
+define('WP_DEBUG', false);
+
+/* That's all, stop editing! Happy blogging. */
+
+/** Absolute path to the WordPress directory. */
+if ( !defined('ABSPATH') )
+	define('ABSPATH', dirname(__FILE__) . '/');
+
+/** Sets up WordPress vars and included files. */
+require_once(ABSPATH . 'wp-settings.php');

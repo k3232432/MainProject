@@ -1,0 +1,27 @@
+---
+ag_wordpress:
+  version: 4.8
+  checksum: sha1:3738189a1f37a03fb9cb087160b457d7a641ccb4
+  phpversion: 7.4
+  phprepo: ppa:ondrej/php
+  basedir: /var/www/html/wordpress
+  apache: true
+  nginx: false
+  servername: localhost
+  docker_env: true
+  disable_ftp: true
+
+ag_wordpress_apache:
+  servername: localhost
+  serveralias: localhost
+  external_load_balancer: true
+  custom_template: apache.wordpress.conf.j2
+
+ag_wordpress_database:
+  driver: mysql
+  hostname: terraform-20201127075937110500000001.cyc3j4uril20.ap-northeast-2.rds.amazonaws.com
+  dbname: wordpress
+  username: wordpress
+  password: password
+  port: null
+  prefix: null
