@@ -27,7 +27,7 @@ ag_wordpress_nginx:
 # pgsql
 ag_wordpress_database:
   driver: mysql
-  hostname: database-1.cyc3j4uril20.ap-northeast-2.rds.amazonaws.com
+  hostname: localhost
   dbname: wordpress
   username: wordpress
   password: password
