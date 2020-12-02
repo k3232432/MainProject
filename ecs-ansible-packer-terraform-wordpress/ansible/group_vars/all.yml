@@ -19,7 +19,7 @@ ag_wordpress_apache:
 
 ag_wordpress_database:
   driver: mysql
-  hostname: terraform-20201127075937110500000001.cyc3j4uril20.ap-northeast-2.rds.amazonaws.com
+  hostname: "insert your terraform or rds endpoint"
   dbname: wordpress
   username: wordpress
   password: password
