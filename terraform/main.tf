@@ -167,8 +167,8 @@ resource "aws_db_subnet_group" "default" {
 resource "aws_db_instance" "default" {
   allocated_storage      = "${var.db_storage}"
   storage_type           = "gp2"
-  engine                 = "mariadb"
-  engine_version         = "10.1.34"
+  engine                 = "mysql"
+  engine_version         = "8.0.20"
   instance_class         = "${var.db_instance}"
   name                   = "${var.db_name}"
   username               = "${var.db_username}"
