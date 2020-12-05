@@ -1,6 +1,6 @@
 variable "region" {
   description = "The region for deployment"
-  default = "ap-northeast-2"
+  default = "insert your region"
 }
 
 variable "fargate_cpu" {
@@ -66,5 +66,5 @@ variable "db_username" {
 
 variable "db_password" {
   description = "The DB password"
-  default     = "password"
+  default     = "insert your database password"
 }
